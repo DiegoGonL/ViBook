@@ -15,6 +15,10 @@ var app = express();
 
 const port = process.env.PORT || 3030;
 
+/* sincronizamos la base de datos con los modelos */
+
+require("./db/db")
+
 
 app.use(logger('dev'));
 app.use(cookieParser());
