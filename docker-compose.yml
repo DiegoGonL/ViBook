@@ -43,7 +43,7 @@
        MYSQL_USER: lisho
        MYSQL_PASSWORD: toor
      ports:
-       - 13013:80
+       - "13013:3306"
      networks:
        - backend
    # SERVICIO DE GESTIÓN DE LA BASE DE DATOS (PHPMYADMIN)
@@ -51,7 +51,7 @@
      image: phpmyadmin
      restart: always
      ports:
-       - 13083:80
+       - "13083:80"
      environment:
        - PMA_ARBITRARY=1
      networks:
