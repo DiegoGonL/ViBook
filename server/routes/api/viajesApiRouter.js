@@ -2,16 +2,21 @@ const router = require('express').Router();
 
 /** Traemos el modelo /modelos si necesitamos datos de otras tablas */
 
+<<<<<<< HEAD
 <<<<<<< develop
 const { Viaje, Etapa, Permiso, Usuario } = require('../../db/db')
 =======
 const { Viaje, Etapa, Parada } = require('../../db/db')
 >>>>>>> Creada primera rupa de la api para el modelo Viajes
+=======
+const { Viaje, Etapa, Parada } = require('../../db/db')
+>>>>>>> 9-crear_-apiroutes
 
 /** Generamos las rutas */
 
 router.get('/',async (req, res) => {
     const todosViajes = await Viaje.findAll( {
+<<<<<<< HEAD
 <<<<<<< develop
         include: [
             { model: Etapa },
@@ -30,6 +35,9 @@ router.get('/',async (req, res) => {
 =======
 
 >>>>>>> Creada primera rupa de la api para el modelo Viajes
+=======
+
+>>>>>>> 9-crear_-apiroutes
     });
     res.json(todosViajes);
 })
@@ -39,17 +47,23 @@ router.get('/:id', async (req, res) => {
         where: {
             id: req.params.id
         },
+<<<<<<< HEAD
 <<<<<<< develop
        /* include: {
             Etapa,
             Parada
         } */
 =======
+=======
+>>>>>>> 9-crear_-apiroutes
         include: {
             Etapa,
             Parada
         }
+<<<<<<< HEAD
 >>>>>>> Creada primera rupa de la api para el modelo Viajes
+=======
+>>>>>>> 9-crear_-apiroutes
     });
     res.json(viaje);
 })
@@ -74,17 +88,23 @@ router.put('/:id', async (req, res) => {
         where: {
             id: req.params.id
         },
+<<<<<<< HEAD
 <<<<<<< develop
         /* include: {
             Etapa,
             Parada
         } */
 =======
+=======
+>>>>>>> 9-crear_-apiroutes
         include: {
             Etapa,
             Parada
         }
+<<<<<<< HEAD
 >>>>>>> Creada primera rupa de la api para el modelo Viajes
+=======
+>>>>>>> 9-crear_-apiroutes
     });
     res.json(viajeActualizado);
 })
@@ -99,17 +119,23 @@ router.delete('/:id', async (req, res) => {
     /* devolver los datos actualizados */
 
     const viajeActualizado = await Viaje.findAll({
+<<<<<<< HEAD
 <<<<<<< develop
        /* include: {
             Etapa,
             Parada
         } */
 =======
+=======
+>>>>>>> 9-crear_-apiroutes
         include: {
             Etapa,
             Parada
         }
+<<<<<<< HEAD
 >>>>>>> Creada primera rupa de la api para el modelo Viajes
+=======
+>>>>>>> 9-crear_-apiroutes
     });
     res.json(viajeActualizado);
 })
