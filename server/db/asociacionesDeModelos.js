@@ -5,7 +5,7 @@ function applyExtraSetup(sequelize) {
       enlaces,
       etapas,
       lugares,
-      misViajes,
+      mis_viajes,
       multimedias,
       paradas,
       permisos,
@@ -13,30 +13,39 @@ function applyExtraSetup(sequelize) {
       viajes,
   } = sequelize.models;
 
-    usuarios.hasMany(viajes, { foreignKey: 'usuarioId', through: misViajes });
-    viajes.belongsTo(usuarios, { foreignKey: 'usuarioId', through: misViajes });
-    usuarios.hasMany(permisos, { foreignKey: 'usuarioId', through: misViajes });
-    permisos.belongsTo(usuarios, { foreignKey: 'usuarioId', through: misViajes });
-    viajes.hasMany(permisos, { foreignKey: 'viajeId', through: misViajes });
-    permisos.belongsTo(viajes, { foreignKey: 'viajeId', through: misViajes });
+    /*usuarios.hasMany(viajes, { foreignKey: 'usuarioId', through: 'mis_viajes' });
+    viajes.belongsTo(usuarios, { foreignKey: 'usuarioId', through: 'mis_viajes' });
+    usuarios.hasMany(permisos, { foreignKey: 'usuarioId', through: 'mis_viajes' });
+    permisos.belongsTo(usuarios, { foreignKey: 'usuarioId', through: 'mis_viajes' });
+    viajes.hasMany(permisos, { foreignKey: 'viajeId', through: 'mis_viajes' });
+    permisos.belongsTo(viajes, { foreignKey: 'viajeId', through: 'mis_viajes' });*/
 
-    viajes.hasMany(etapas, { foreignKey: 'viajeId' });
-    etapas.belongsTo(viajes, { foreignKey: 'viajeId' });
+    viajes.belongsToMany(usuarios, { through: mis_viajes});
+    usuarios.belongsToMany(viajes, { through: mis_viajes });
 
-    etapas.hasMany(paradas, { foreignKey: 'etapaId' });
-    paradas.belongsTo(etapas, { foreignKey: 'etapaId' });
+    viajes.belongsToMany(permisos, { through: mis_viajes });
+    permisos.belongsToMany(viajes, { through: mis_viajes });
 
-    paradas.hasMany(enlaces, { foreignKey: 'paradaId' });
-    enlaces.belongsTo(paradas, { foreignKey: 'paradaId' });
+    permisos.belongsToMany(usuarios, { through: mis_viajes });
+    usuarios.belongsToMany(permisos, { through: mis_viajes });
 
-    paradas.hasMany(anotaciones, { foreignKey: 'paradaId' });
-    anotaciones.belongsTo(paradas, { foreignKey: 'paradaId' });
+    viajes.hasMany(etapas);
+    etapas.belongsTo(viajes);
 
-    paradas.hasMany(multimedias, { foreignKey: 'paradaId' });
-    multimedias.belongsTo(paradas, { foreignKey: 'paradaId' });
+    etapas.hasMany(paradas);
+    paradas.belongsTo(etapas);
 
-    lugares.hasMany(paradas, { foreignKey: 'paradaId' });
-    paradas.belongsTo(lugares, { foreignKey: 'paradaId' });
+    paradas.hasMany(enlaces);
+    enlaces.belongsTo(paradas);
+
+    paradas.hasMany(anotaciones);
+    anotaciones.belongsTo(paradas);
+
+    paradas.hasMany(multimedias);
+    multimedias.belongsTo(paradas);
+
+    lugares.hasMany(paradas);
+    paradas.belongsTo(lugares);
 
   // tecnico.hasMany(user, { onDelete: 'CASCADE', hooks: true  });
 
