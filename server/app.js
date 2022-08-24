@@ -1,4 +1,5 @@
 var express = require('express');
+const bodyParser = require("body-parser");
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -8,7 +9,7 @@ var logger = require('morgan');
 
 /** Importamos las rutas de la api */
 
-/* const apiRouter = require("./routes/api"); */
+const apiRouter = require("./routes/api");
 
 /** Iniciamos el servidor de express */
 var app = express();
@@ -19,11 +20,12 @@ const port = process.env.PORT || 3030;
 
 require("./db/db")
 
-
+/*
 app.use(logger('dev'));
-app.use(cookieParser());
+app.use(cookieParser()); */
 
-app.use(express.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -32,7 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //--> Redireccionamos las rutas que vengan a api
 
-/* app.use("/api", apiRouter); */
+app.use("/api", apiRouter);
 
 
 /** Arrancamos el servidor */
@@ -41,5 +43,5 @@ app.listen(port, () => {
 });
 
 
-module.exports = app;
 
+ module.exports = app;
