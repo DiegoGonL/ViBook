@@ -4,6 +4,7 @@
    frontend:
      build: './client'
      # Host port proxy
+     restart: always
      ports:
        - "13003:3000"
      volumes:
@@ -24,6 +25,7 @@
       # Host port proxy
      ports:
        - "13033:3030"
+     restart: always
      volumes:
        - ./server:/app
      depends_on:
