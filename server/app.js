@@ -26,6 +26,7 @@ require("./db/db")
 
 const allowlist = ["http://0.0.0.0:4000",
     "http://0.0.0.0:13030",
+    "http://localhost:13003",
     "http://0.0.0.0:13003",
     "http://192.168.31.192:4000",
     'http://localhost:3000',
