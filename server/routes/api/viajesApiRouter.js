@@ -4,10 +4,6 @@ const router = require('express').Router();
 
 const { Viaje, Etapa, Permiso, Usuario } = require('../../db/db')
 
-const { Viaje, Etapa, Parada } = require('../../db/db')
-
-const { Viaje, Etapa, Parada } = require('../../db/db')
-
 /** Generamos las rutas */
 
 router.get('/',async (req, res) => {
