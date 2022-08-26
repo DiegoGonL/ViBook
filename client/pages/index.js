@@ -1,39 +1,42 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import Link from "next/link";
+import {Button, Grid} from "@mui/material";
 
 
 export default function Home() {
 
 
   return (
-      <>
-    <div className={styles.container}>
 
+      <Grid
+          container
+          spacing={0}
+          align="center"
+          justify="center"
+          direction="column"
+          style={{ backgroundColor: 'teal' }}
+          minHeight={'100vh'}
+           display={'flex'}
+           alignItems={'center'}
+           justifyContent={'center'}
+      >
+        <Grid item xs={12}>
+               <h1> Welcome to ViBook App</h1>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to ViBook App
-        </h1>
+        </Grid>
 
+          <Grid item xs={12}>
+              <Link href={'/viajes'}>
+          <Button variant="contained" color="primary" >
 
-      </main>
+              Ir a viajes
 
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
+          </Button>
+              </Link>
+        </Grid>
+      </Grid>
 
-
-    </div>
-</>
   )
 }
