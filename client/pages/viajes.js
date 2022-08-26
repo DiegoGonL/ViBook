@@ -1,5 +1,8 @@
 import {useEffect, useState} from 'react'
 import useSWR from "swr";
+import {Button, Grid} from "@mui/material";
+import Link from "next/link";
+import CardViajes from "../components/CardViaje";
 
 const componentConfig = {
     url: process.env.NEXT_PUBLIC_URL_API+"viajes/",
@@ -23,18 +26,72 @@ const Viajes = () => {
 
 
     return (
-        <div>
-            Viajes
 
-            {data.map((viaje) => (
-                <div key={viaje.id}>
-                    {viaje.id}
-                    {viaje.nombre}
-                </div>
-            ))}
+        <Grid
+            container
 
-        </div>
-    );
+            spacing={0}
+            style={{ backgroundColor: 'teal' }}
+            minHeight={'100vh'}
+            p={5}
+
+        >
+            <Grid container xs={12}
+                  style={{ backgroundColor: 'white' }}
+                    p={5}
+            >
+                <Grid item md={8} xs={12}
+                        align="left"
+                >
+                    <h2> Mis viajes</h2>
+                    <hr/>
+                </Grid>
+
+                <Grid item md={4} xs={12} align="right">
+                    <Button variant="contained" color="success" >
+                        <Link href={'/viajes/nuevo'}> Nuevo viaje</Link>
+                    </Button>
+
+                </Grid>
+
+            </Grid>
+
+            <Grid container xs={12}
+                  style={{ backgroundColor: 'white' }}
+                    p={5}
+            >
+
+                {data.map((viaje) => (
+
+                    <CardViajes key={viaje.id} viaje={viaje.nombre} />
+
+                ))}
+            </Grid>
+
+            <Grid container xs={12}
+                  style={{ backgroundColor: 'white' }}
+            p={5}
+            >
+
+                <Grid item xs={12} md={8}
+                      align="left"
+                >
+                    <h2> Más Viajes (Sólo ver)</h2>
+                    <hr/>
+                </Grid>
+            </Grid>
+
+            <Grid container xs={12}
+                  style={{ backgroundColor: 'white' }}
+            p={5}
+            >
+
+
+            </Grid>
+
+        </Grid>
+
+    )
 };
 
 export default Viajes;
