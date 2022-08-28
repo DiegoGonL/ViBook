@@ -5,31 +5,54 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import {CardActionArea, IconButton} from "@mui/material";
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import ShareIcon from '@mui/icons-material/Share';
 
 export default function CardViaje(
-
+    {viaje, description, foto_portada}
 ) {
     return (
-        <Card sx={{ maxWidth: 345 }}>
+
+    <Card sx={{ maxWidth: 345 }}>
+        <CardActionArea>
             <CardMedia
                 component="img"
                 height="140"
-                image="https://media.revistagq.com/photos/5ca5f2ee3492a907b2bf0eaa/master/w_1600,c_limit/torre_de_pisa_1505.jpg"
+                image={foto_portada}
                 alt="green iguana"
             />
             <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                    Lizard
+                    {viaje}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                    Lizards are a widespread group of squamate reptiles, with over 6,000
-                    species, ranging across all continents except Antarctica
+                    {description}
+                </Typography>
+                <Typography   variant="soft"
+                              color="danger"
+                              borderRadius="xs"
+                              display="inline-flex"
+                          py={1}
+                              fontSize="sm"
+                              fontWeight="bold"
+                              sx={{ '--Typography-gap': '0.5rem' }}
+                >
+                    12/03/2022 - 22/03/2022
                 </Typography>
             </CardContent>
-            <CardActions>
-                <Button size="small">Share</Button>
-                <Button size="small">Learn More</Button>
-            </CardActions>
-        </Card>
-    );
+        </CardActionArea>
+        <CardActions>
+            <IconButton aria-label="add to favorites">
+                <FavoriteIcon />
+            </IconButton>
+            <IconButton aria-label="share">
+                <ShareIcon />
+            </IconButton>
+
+        </CardActions>
+    </Card>
+
+    )
+
 }

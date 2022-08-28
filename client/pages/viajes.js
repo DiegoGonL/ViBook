@@ -3,6 +3,7 @@ import useSWR from "swr";
 import {Button, Grid} from "@mui/material";
 import Link from "next/link";
 import CardViajes from "../components/CardViaje";
+import uuid from "react-uuid";
 
 const componentConfig = {
     url: process.env.NEXT_PUBLIC_URL_API+"viajes/",
@@ -36,7 +37,7 @@ const Viajes = () => {
             p={5}
 
         >
-            <Grid container xs={12}
+            <Grid container xs={12} item
                   style={{ backgroundColor: 'white' }}
                     p={5}
             >
@@ -56,19 +57,25 @@ const Viajes = () => {
 
             </Grid>
 
-            <Grid container xs={12}
+            <Grid container xs={12} item
                   style={{ backgroundColor: 'white' }}
                     p={5}
             >
 
                 {data.map((viaje) => (
 
-                    <CardViajes key={viaje.id} viaje={viaje.nombre} />
+                    <CardViajes
+                        key={uuid()}
+                        viaje={viaje.nombre}
+                        description={viaje.description}
+                        foto_portada={viaje.foto_portada}
+
+                    />
 
                 ))}
             </Grid>
 
-            <Grid container xs={12}
+            <Grid container xs={12} item
                   style={{ backgroundColor: 'white' }}
             p={5}
             >
@@ -81,7 +88,7 @@ const Viajes = () => {
                 </Grid>
             </Grid>
 
-            <Grid container xs={12}
+            <Grid container xs={12} item
                   style={{ backgroundColor: 'white' }}
             p={5}
             >
