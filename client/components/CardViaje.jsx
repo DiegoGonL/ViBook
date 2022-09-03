@@ -8,9 +8,11 @@ import Typography from '@mui/material/Typography';
 import {CardActionArea, IconButton} from "@mui/material";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
+import EditIcon from '@mui/icons-material/Edit';
+import Link from "next/link";
 
 export default function CardViaje(
-    {viaje, description, foto_portada}
+    {id, viaje, description, foto_portada}
 ) {
     return (
 
@@ -49,6 +51,12 @@ export default function CardViaje(
             <IconButton aria-label="share">
                 <ShareIcon />
             </IconButton>
+            <Link href={'/viajes/viajesForm?id='+id }>
+            <IconButton aria-label="edit">
+
+                 <EditIcon />
+
+            </IconButton></Link>
 
         </CardActions>
     </Card>
