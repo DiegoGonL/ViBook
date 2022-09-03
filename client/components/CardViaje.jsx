@@ -24,7 +24,8 @@ export default function CardViaje(
 
     return (
 
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ width:345, maxWidth: "80wv", margin: 2 }}
+    >
         <CardActionArea>
             <CardMedia
                 component="img"
