@@ -8,12 +8,13 @@ var logger = require('morgan');
 // var indexRouter = require('./routes/index');
 // var usersRouter = require('./routes/users');
 
+/** Iniciamos el servidor de express */
+var app = express();
+
 /** Importamos las rutas de la api */
 
 const apiRouter = require("./routes/api");
 
-/** Iniciamos el servidor de express */
-var app = express();
 
 const port = process.env.PORT || 3030;
 
@@ -43,6 +44,9 @@ const corsOptionsDelegate = function (req, callback) {
     callback(null, corsOptions); // callback expects two parameters: error and options
 };
 
+/*
+app.use(cors(corsOptionsDelegate));
+*/
 app.use(cors(corsOptionsDelegate));
 
 //--> END configuración de cors

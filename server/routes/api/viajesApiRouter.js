@@ -17,94 +17,43 @@ router.get('/',async (req, res) => {
                     }
             ]},
         ]
-
-       /* include: {
-            Etapa,
-            Parada
-        } */
-
     });
     res.json(todosViajes);
-})
+});
 
 router.get('/:id', async (req, res) => {
-    const viaje = await Viaje.findOne({
-        where: {
-            id: req.params.id
-        },
-
-       /* include: {
-            Etapa,
-            Parada
-        } */
-
-        include: {
-            Etapa,
-            Parada
-        }
-
+    const viaje = await Viaje.findByPk(req.params.id, {
+        include: [
+            { model: Etapa },
+            { model: Usuario,
+                include: [
+                    { model: Permiso,
+                        attributes: ['permiso']
+                    }
+            ]},
+        ]
     });
     res.json(viaje);
-})
+}  );
 
 router.post('/', async (req, res) => {
     const viaje = await Viaje.create(req.body);
-    res.json(viaje);
-})
+    res.json({ message: 'Viaje creado correctamente' });
+
+} );
 
 router.put('/:id', async (req, res) => {
     await Viaje.update(req.body, {
-        where: {
-            id: req.params.id
-        }
+        where: { id: req.params.id }
     });
+    res.json({ success: 'Se ha modificado el viaje' });
+}   );
 
-    /* devolver los datos actualizados */
-
-    /*  const viajeActualizado = await Viaje.findByPk(req.body.id); */
-
-    const viajeActualizado = await Viaje.findOne({
-        where: {
-            id: req.params.id
-        },
-
-        /* include: {
-            Etapa,
-            Parada
-        } */
-
-        include: {
-            Etapa,
-            Parada
-        }
-
-    });
-    res.json(viajeActualizado);
-})
-
-router.delete('/:id', async (req, res) => {
+router.delete('/:viajeid', async (req, res) => {
     await Viaje.destroy({
-        where: {
-            id: req.params.id
-        }
+        where: { id: req.params.id }
     });
-
-    /* devolver los datos actualizados */
-
-    const viajeActualizado = await Viaje.findAll({
-
-       /* include: {
-            Etapa,
-            Parada
-        } */
-
-        include: {
-            Etapa,
-            Parada
-        }
-
-    });
-    res.json(viajeActualizado);
-})
+    res.json({ success: 'Se ha eliminado el viaje' });
+}   );
 
 module.exports = router;
