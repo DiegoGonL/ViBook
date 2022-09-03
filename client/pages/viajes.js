@@ -1,4 +1,3 @@
-import {useEffect, useState} from 'react'
 import useSWR from "swr";
 import {Button, Grid} from "@mui/material";
 import Link from "next/link";
@@ -6,7 +5,7 @@ import CardViajes from "../components/CardViaje";
 import uuid from "react-uuid";
 
 const componentConfig = {
-    url: process.env.NEXT_PUBLIC_URL_API+"viajes/",
+    url: process.env.NEXT_PUBLIC_URL_API+"viajes",
     botonNav: "Tecnicos/as",
     titulo: "Técnicos/as EDIS",
     tituloLista: "Listado de todos los técnicos/as registrados",
@@ -30,7 +29,6 @@ const Viajes = () => {
 
         <Grid
             container
-
             spacing={0}
             style={{ backgroundColor: 'teal' }}
             minHeight={'100vh'}
@@ -50,7 +48,8 @@ const Viajes = () => {
 
                 <Grid item md={4} xs={12} align="right">
                     <Button variant="contained" color="success" >
-                        <Link href={'/viajes/nuevo'}> Nuevo viaje</Link>
+                        <Link href={'/viajes/viajesForm'}
+                        > Nuevo viaje</Link>
                     </Button>
 
                 </Grid>
@@ -66,6 +65,7 @@ const Viajes = () => {
 
                     <CardViajes
                         key={uuid()}
+                        id={viaje.id}
                         viaje={viaje.nombre}
                         description={viaje.description}
                         foto_portada={viaje.foto_portada}
