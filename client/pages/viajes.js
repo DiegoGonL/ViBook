@@ -3,6 +3,7 @@ import {Button, Grid} from "@mui/material";
 import Link from "next/link";
 import CardViajes from "../components/CardViaje";
 import uuid from "react-uuid";
+import {useEffect, useState} from "react";
 
 const componentConfig = {
     url: process.env.NEXT_PUBLIC_URL_API+"viajes",
@@ -15,11 +16,19 @@ const componentConfig = {
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 const Viajes = () => {
+    const [viajes, setViajes] = useState();
 
     const { data, error } = useSWR(
         componentConfig.url,
         fetcher
     );
+
+    useEffect(() => {
+
+        setViajes(data)
+
+    }, [data]);
+
     if (data) {console.log("Los datos son", data)}
     if (error) return "An error has occurred.";
     if (!data) return "Loading...";
@@ -61,18 +70,19 @@ const Viajes = () => {
                     p={5}
             >
 
-                {data.map((viaje) => (
+                {viajes && viajes.map((viaje) => {
+                        console.log(viaje)
+                        return <CardViajes
+                            key={uuid()}
+                            id={viaje.id}
+                            viaje={viaje.nombre}
+                            description={viaje.description}
+                            foto_portada={viaje.foto_portada}
+                            setEstado={setViajes}
 
-                    <CardViajes
-                        key={uuid()}
-                        id={viaje.id}
-                        viaje={viaje.nombre}
-                        description={viaje.description}
-                        foto_portada={viaje.foto_portada}
-
-                    />
-
-                ))}
+                        />
+                    }
+                )}
             </Grid>
 
             <Grid container xs={12} item

@@ -49,11 +49,22 @@ router.put('/:id', async (req, res) => {
     res.json({ success: 'Se ha modificado el viaje' });
 }   );
 
-router.delete('/:viajeid', async (req, res) => {
+router.delete('/:id', async (req, res) => {
     await Viaje.destroy({
         where: { id: req.params.id }
     });
-    res.json({ success: 'Se ha eliminado el viaje' });
+    const todosViajes = await Viaje.findAll( {
+        include: [
+            { model: Etapa },
+            { model: Usuario,
+                include: [
+                    { model: Permiso,
+                        attributes: ['permiso']
+                    }
+                ]},
+        ]
+    });
+    res.json(todosViajes);
 }   );
 
 module.exports = router;

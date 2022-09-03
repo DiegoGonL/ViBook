@@ -1,10 +1,25 @@
-import { confirmAlert } from "react-confirm-alert"; // Import
-import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
+/*import { confirmAlert } from "react-confirm-alert"; */// Import
+/*import "react-confirm-alert/src/react-confirm-alert.css";*/ // Import css
 
 const theme = {};
 
 const borrarElementoEnBd = (url, setEstado, mensaje) => {
-  confirmAlert({
+
+    fetch(url, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+        .then((res) => res.json())
+        .catch((error) => console.error("Error:", error))
+        .then((response) => {
+            console.log("Success:", response);
+            setEstado(response);
+        });
+
+
+/*  confirmAlert({
     customUI: ({ onClose }) => {
       return (
         <>
@@ -60,7 +75,7 @@ const borrarElementoEnBd = (url, setEstado, mensaje) => {
         </>
       );
     },
-  });
+  });*/
 };
 
 export default borrarElementoEnBd;

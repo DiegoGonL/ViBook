@@ -9,11 +9,19 @@ import {CardActionArea, IconButton} from "@mui/material";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 import Link from "next/link";
+import borrarElementoEnBD from "../helpers/borrarElementoEnBD";
+
+
 
 export default function CardViaje(
-    {id, viaje, description, foto_portada}
+    {id, viaje, description, foto_portada, setEstado}
 ) {
+
+
+    const handleBorrar =  () => {borrarElementoEnBD(process.env.NEXT_PUBLIC_URL_API+`viajes/`+id, setEstado)}
+
     return (
 
     <Card sx={{ maxWidth: 345 }}>
@@ -57,6 +65,11 @@ export default function CardViaje(
                  <EditIcon />
 
             </IconButton></Link>
+
+
+                <IconButton aria-label="borrar" onClick={() => handleBorrar()  }>
+                    <DeleteIcon />
+                </IconButton>
 
         </CardActions>
     </Card>

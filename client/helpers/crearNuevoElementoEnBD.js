@@ -8,7 +8,7 @@
  ** Manda los datos por POST, recive los datos en res una vez insertados, los formatea en response y actualiza el estado de la lista
  */
 
-const crearNuevoElementoEnBd = (url, data, setEstado, estado) => {
+const crearNuevoElementoEnBd = (url, data, handleClose) => {
   fetch(url, {
     method: "POST", // or 'PUT'
     body: JSON.stringify(data), // data can be `string` or {object}!
@@ -18,8 +18,10 @@ const crearNuevoElementoEnBd = (url, data, setEstado, estado) => {
   })
     .then((res) => res.json())
     .catch((error) => console.error("Error:", error))
-    .then((response) => 
-      setEstado([response, ...estado]) );
+    .then((response) => {
+      console.log("Success:", response);
+      handleClose();
+    })
 };
 
 export default crearNuevoElementoEnBd;

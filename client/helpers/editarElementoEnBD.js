@@ -1,6 +1,5 @@
 
-
-const editarElementoEnBd = (url, data) => {
+const editarElementoEnBd = (url, data, handleClose) => {
 
     console.log(url);
     console.log(JSON.stringify(data));
@@ -13,6 +12,11 @@ const editarElementoEnBd = (url, data) => {
     })
       .then((res) => console.log(res))
       .catch((error) => console.error("Error:", error))
+        .then((response) => {
+            console.log("Success:", response);
+            handleClose();
+        })
+
 
   };
   

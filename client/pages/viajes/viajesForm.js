@@ -2,27 +2,29 @@ import {Box, Button, CardHeader, FormControl, FormLabel, Input, TextField} from 
 import CardContent from "@mui/material/CardContent";
 import Card from "@mui/material/Card";
 import {useForm, Controller} from "react-hook-form";
-import {useRouter} from "next/router";
+import {Router, useRouter} from "next/router";
 import useSWR from "swr";
 
 import editarElementoEnBd from "../../helpers/editarElementoEnBD";
+import crearNuevoElementoEnBD from "../../helpers/crearNuevoElementoEnBD";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
-
 
 const ViajesForm = () => {
 
     const router = useRouter();
     const { id } = router.query;
-    const url = process.env.NEXT_PUBLIC_URL_API+`viajes?id=`+id;
-
+    const isAddMode = !id;
+    console.log("El id es", id);
+    const url = isAddMode ? process.env.NEXT_PUBLIC_URL_API+`viajes/` : process.env.NEXT_PUBLIC_URL_API+`viajes/`+id;
+console.log("La url es", url);
     const handleClose = () => router.back();
     const { data, error } = useSWR(
         url,
         fetcher
     );
+    console.log("Los datos son", data);
 
-    const isAddMode = !id;
 
     const formOptions = { };
 
@@ -40,10 +42,11 @@ const ViajesForm = () => {
 
     function onSubmit(datosModificados) {
         return isAddMode
-            ? createUser(datosModificados)
-            : editarElementoEnBd(process.env.NEXT_PUBLIC_URL_API+`viajes/`+id, datosModificados);
-    }
+            ? crearNuevoElementoEnBD(process.env.NEXT_PUBLIC_URL_API+`viajes/`, datosModificados, handleClose)
+            : editarElementoEnBd(process.env.NEXT_PUBLIC_URL_API+`viajes/`+id,
+                                    datosModificados, handleClose)
 
+    }
 
     if (error) return "An error has occurred.";
     if (!data) return "Loading...";
@@ -67,7 +70,7 @@ const ViajesForm = () => {
                     <Controller
                         name="nombre"
                         control={control}
-                        defaultValue= {!isAddMode ? data[0].nombre : ''}
+                        defaultValue= {!isAddMode ? data.nombre : ''}
                         render={({ field: { onChange, value }, fieldState: { error } }) => (
                             <TextField
                                 label="Nombre del viaje"
@@ -84,7 +87,7 @@ const ViajesForm = () => {
                     <Controller
                         name="description"
                         control={control}
-                        defaultValue= {!isAddMode ? data[0].description : ''}
+                        defaultValue= {!isAddMode ? data.description : ''}
                         render={({ field: { onChange, value }, fieldState: { error } }) => (
                             <TextField
                                 label="Descripción del viaje"
@@ -102,7 +105,7 @@ const ViajesForm = () => {
                     <Controller
                         name="foto_portada"
                         control={control}
-                        defaultValue= {!isAddMode ? data[0].foto_portada : ''}
+                        defaultValue= {!isAddMode ? data.foto_portada : ''}
                         render={({ field: { onChange, value }, fieldState: { error } }) => (
                             <TextField
                                 label="Foto de portada"
