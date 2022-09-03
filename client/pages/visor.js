@@ -1,6 +1,7 @@
 import React from 'react';
 import {Grid, IconButton} from "@mui/material";
 import {ArrowBackIos, ArrowForwardIos} from "@mui/icons-material";
+import VisorMultimediaCard from "../components/visorMultimediaCard";
 
 function Visor(props) {
     return (
@@ -43,8 +44,7 @@ function Visor(props) {
                         </IconButton>
                     </Grid>
                     <Grid item>
-                        {/*TODO: Reemplazar por un componente de card con la imagen descriocion y botones de borrar y editar*/}
-                        <img width={"700px"} src={"https://uning.es/wp-content/uploads/2016/08/ef3-placeholder-image-300x203.jpg"} alt={"placeholder photo"}/>
+                        <VisorMultimediaCard></VisorMultimediaCard>
                     </Grid>
                     <Grid item>
                         <IconButton>
