@@ -1,7 +1,7 @@
 import React from 'react';
 import {Grid, IconButton} from "@mui/material";
 import {ArrowBackIos, ArrowForwardIos} from "@mui/icons-material";
-import VisorMultimediaCard from "../components/visorMultimediaCard";
+import VisorMultimediaCard from "../components/visor/VisorMultimediaCard";
 
 function Visor(props) {
     return (
@@ -10,6 +10,7 @@ function Visor(props) {
             direction="column"
             justifyContent="space-between"
             alignItems="center"
+            height={"100%"}
         >
             <Grid item id={"visor-header"} width={"100%"}>
                 <Grid
@@ -36,8 +37,7 @@ function Visor(props) {
                     container
                     justifyContent={"center"}
                     alignItems={"center"}
-                    spacing={4}
-                >
+                    spacing={4}>
                     <Grid item>
                         <IconButton>
                             <ArrowBackIos fontSize={"large"}/>
